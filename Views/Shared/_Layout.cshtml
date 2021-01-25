@@ -1,0 +1,71 @@
+﻿@{ 
+    bool isAuthenticated = User.Identity.IsAuthenticated;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="icon" href="data:;base64,=">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ng-table/1.0.0/ng-table.min.css" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#top_menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top_menu">
+                <a href="/" class="navbar-brand"><i class="fa fa-cloud" aria-hidden="true"></i></a>
+                <a href="/" class="navbar-text text-decoration-none">Acme Info Systems</a>
+                <ul class="navbar-nav ml-5">
+                    @if (isAuthenticated)
+                    {
+                        <li class="nav-item" routerLinkActive="active">
+                            <a href="/" class="nav-link"><i class="fa fa-home mr-1"></i> Home</a>
+                        </li>
+                    }
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    @if (!isAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <a href="javascript:void(0)" class="nav-link" onclick="PromptLogin()"><i class="fa fa-sign-in mr-1"></i> Login</a>
+                        </li>
+                    }
+                    @if (isAuthenticated)
+                    {
+                        <li class="nav-item dropdown">
+                            <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-toggle="dropdown" data-target="user_sub_menu">
+                                <i class="fa fa-user mr-1"></i> @User.Identity.Name
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="user_sub_menu">
+                                <a href="#" class="dropdown-item"><i class="fa fa-key mr-1"></i> Change Password</a>
+                                <div class="dropdown-divider"></div>
+                                <a href="/Home/Logout" class="dropdown-item"><i class="fa fa-sign-out mr-1"></i> Logout</a>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container" ng-app="acmeApp" ng-controller="accountController">
+        @RenderBody()
+        @Html.Partial("LoginForm")
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-table/1.0.0/ng-table.js"></script>
+    <script src="~/Scripts/Site.js"></script>
+    <script src="~/Scripts/AcmeAngular.js"></script>
+    @RenderSection("scripts", false)
+</body>
+</html>

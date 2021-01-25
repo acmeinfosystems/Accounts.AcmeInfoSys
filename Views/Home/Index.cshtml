@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    @Html.Partial("JournalGrid")
+    @Html.Partial("JournalEntryForm")
+}
+else
+{
+    <div class="text-center mt-5">
+        <h2 class="mb-3">Welcome Guest!</h2>
+        <h4>If you are Authorized to access this Application, please <a href="javascript:void(0)" onclick="PromptLogin()">Click Here</a> to login.</h4>
+    </div>
+}
+

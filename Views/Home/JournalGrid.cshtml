@@ -1,0 +1,21 @@
+﻿<p>&nbsp;</p>
+<div class="row mb-3">
+    <div class="col-3">
+        <button class="btn btn-dark" type="button" onclick="NewJournalEntry()"><i class="fa fa-plus" aria-hidden="true"></i> &nbsp;New Entry</button>
+    </div>
+    <div class="col-9">
+        <strong class="text-success">{{journalSuccessMessage}}</strong>
+    </div>
+</div>
+<div ng-init="getJournalData()">
+    <table ng-table="tableParams" class="table table-condensed table-bordered table-striped">
+        <tr ng-repeat="row in $data" ng-dblclick="MakeEntryEditable(row)">
+            <td data-title="'No'" align="center" style="width:7%;">{{ ((tableParams.page() - 1) * tableParams.count()) + ($index + 1) }}</td>
+            <td data-title="'Date'" sortable="'Date'" filter="{ 'Date': 'text' }" style="width:18%;" align="center">{{row.Date}}</td>
+            <td data-title="'Name'" sortable="'Name'" filter="{ 'Name': 'text' }" style="width:50%;">{{row.Name}}</td>
+            <td data-title="'Entry'" sortable="'Entry'" filter="{ 'Entry': 'text' }" style="width: 10%;" align="center">{{row.Entry}}</td>
+            <td data-title="'Amount'" sortable="'Amount'" filter="{ 'Amount': 'text' }" style="width:15%;" align="center">{{row.Amount}}</td>
+        </tr>
+    </table>
+</div>
+

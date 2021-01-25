@@ -1,0 +1,77 @@
+﻿<form name="journalEntryForm">
+    <div id="journalEntryModule" title="Journal Entry">
+        <div class="mt-3">
+            <strong class="text-danger">{{journalEntryError}}</strong>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group mt-3">
+                    <div class="input-group mr-sm-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fa fa-calendar-check-o" aria-hidden="true"></i></div>
+                        </div>
+                        <input type="text" class="form-control" ng-model="journal.TransactionDate" id="transactionDate" placeholder="Date is Required" required />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <div class="input-group mr-sm-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;</div>
+                        </div>
+                        <select class="form-control" ng-model="journal.Name" required>
+                            <option value="">---- Select Name ----</option>
+                            <option value="Acme Info Systems">Acme Info Systems</option>
+                            <option value="Manu K Paul">Manu K Paul</option>
+                            <option value="Mathews K Baby">Mathews K Baby</option>
+                            <option value="Shiju Joseph">Shiju Joseph</option>
+                            <option value="Sreejith Gopinathan">Sreejith Gopinathan</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div class="form-group">
+                    <div class="input-group mb-2 mr-sm-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">&nbsp;<i class="fa fa-inr" aria-hidden="true"></i>&nbsp;</div>
+                        </div>
+                        <input type="number" class="form-control" placeholder="Amount is Required" ng-model="journal.Amount" required />
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <div class="input-group mb-2 mr-sm-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fa fa-book" aria-hidden="true"></i></div>
+                        </div>
+                        <select class="form-control" ng-model="journal.Entry">                           
+                            <option value="CR">CR</option>
+                            <option value="DR">DR</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group mb-2 mr-sm-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-comment-o" aria-hidden="true"></i></div>
+                </div>
+                <textarea class="form-control" rows="4" placeholder="Remark is Required" ng-model="journal.Particulars" required></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="button" class="btn btn-dark mr-2" ng-disabled="journalEntryForm.$invalid" ng-click="SaveJournalEntry()" id="btnSaveJournal"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Save</button>
+            <button type="button" class="btn btn-light" ng-show="!journal.Id" ng-click="ClearJournalEntry()"><i class="fa fa-ban" aria-hidden="true"></i>&nbsp; Clear</button>
+            <button type="button" class="btn btn-light" ng-show="journal.Id" onclick="CloseJournalEntry()"><i class="fa fa-ban" aria-hidden="true"></i>&nbsp; Cancel</button>
+            <input type="hidden" ng-model="journal.Id" />
+        </div>
+    </div>
+</form>
